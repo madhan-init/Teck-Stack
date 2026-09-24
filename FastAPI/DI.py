@@ -15,11 +15,18 @@ from fastapi import FastAPI, Depends
 app = FastAPI()
 
 
+def common_parameters():
+    return {
+        "message": "This is a dependency"
+    }
 
 
-
-def verify_token():
-    return "valid-token"
+@app.get("/users")
+def get_users(data=Depends(common_parameters)):
+    return {
+        "users": ["Madhan", "Arun"],
+        "dependency": data
+    }
 
 
 @app.get("/protected")

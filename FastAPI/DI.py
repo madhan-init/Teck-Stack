@@ -29,6 +29,10 @@ def get_users(data=Depends(common_parameters)):
     }
 
 
+def verify_token():
+    return "valid-token"
+
+
 @app.get("/protected")
 def protected_route(token=Depends(verify_token)):
     return {
